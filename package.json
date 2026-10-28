@@ -1,0 +1,41 @@
+{
+  "name": "@urthella/skill-lint",
+  "version": "0.1.0",
+  "description": "Lint Agent Skills (SKILL.md) against the agentskills.io spec: frontmatter rules, broken links, nested references, size limits",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Urthella/skill-lint.git"
+  },
+  "keywords": [
+    "agent-skills",
+    "skills",
+    "claude-code",
+    "lint",
+    "skill-md",
+    "ai-agents"
+  ],
+  "bin": {
+    "skill-lint": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.ts",
+    "prepare": "tsc"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^7.0.2"
+  }
+}
