@@ -18,6 +18,20 @@ skills/pdf-tools/SKILL.md:15  error    broken-link        "references/forms.md" 
 
 Exit code is 1 on errors (or on warnings too with `--strict`), so it drops straight into CI.
 
+## GitHub Action
+
+Problems show up as annotations right on the lines of the PR diff:
+
+```yaml
+- uses: actions/checkout@v4
+- uses: Urthella/skill-lint@main
+  with:
+    path: skills        # space-separated folders, default "."
+    strict: true        # fail on warnings too, default false
+```
+
+The action sets up Node 24 for its own run. Outside Actions, `--format github` prints the same annotations.
+
 ## Rules
 
 | Rule | Severity | Checks |
