@@ -1,0 +1,28 @@
+name: skill-lint
+description: Lint Agent Skills (SKILL.md) against the agentskills.io spec, with inline PR annotations
+branding:
+  icon: check-square
+  color: purple
+
+inputs:
+  path:
+    description: Skill folders or folders to search, space-separated
+    default: "."
+  strict:
+    description: Fail on warnings too
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - shell: bash
+      run: npm ci --omit=dev --ignore-scripts --silent --prefix "$GITHUB_ACTION_PATH"
+    # Inputs go through env, never straight into the script, so a path can't inject shell.
+    - shell: bash
+      env:
+        SKILL_PATHS: ${{ inputs.path }}
+        STRICT: ${{ inputs.strict }}
+      run: node "$GITHUB_ACTION_PATH/src/cli.ts" $SKILL_PATHS --format github $([ "$STRICT" = true ] && echo --strict)
